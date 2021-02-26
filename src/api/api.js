@@ -12,21 +12,38 @@ const baseApi = axios.create({
 
 export const postsApi = {
   getPosts() {
-    return baseApi.get('posts/').then(response => response.data);
+    return baseApi.get('posts/').then((response) => response.data);
   },
   getSelectFieldsOptions() {
     return baseApi
       .options('posts/')
-      .then(response => utils.reduceSelectFields(response.data.actions.POST));
+      .then((response) =>
+        utils.reduceSelectFields(response.data.actions.POST)
+      );
   },
   getMany2ManyFieldsOptions() {
     return baseApi
       .get('categories/')
-      .then(response => utils.reduceMany2ManyFields(response.data));
+      .then((response) => utils.reduceMany2ManyFields(response.data));
   },
-  createPost(data, options) {
-    const postData = utils.parseSelectFieldsData(data, options);
-    return baseApi.post('posts/', postData);
+  createPost(values, options) {
+    let parsedValues = utils.parseSelectFieldsData(values, options);
+    let formData = new FormData();
+    console.log(parsedValues);
+    for (let [key, value] of Object.entries(parsedValues)) {
+      if (typeof value === 'object') {
+        for (let item of value) {
+          formData.append(key, item);
+        }
+      } else {
+        formData.append(key, value);
+      }
+    }
+    return baseApi.post('posts/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   },
   deletePost(postId) {
     return baseApi.delete(`posts/${postId}`);

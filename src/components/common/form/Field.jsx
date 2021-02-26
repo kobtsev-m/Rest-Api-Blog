@@ -3,11 +3,14 @@ import { Form } from 'react-bootstrap';
 import { capitalize } from 'lodash';
 
 function FormControl({ handleChange, errors, isSubmitted, ...props }) {
+  const handleChangeControl = (event) => {
+    handleChange({ [event.target.name]: event.target.value });
+  };
   return (
     <Form.Group controlId={`${props.name}Input`}>
       <Form.Label>{capitalize(props.name)}</Form.Label>
       <Form.Control
-        onChange={handleChange}
+        onChange={handleChangeControl}
         isValid={isSubmitted && !errors[props.name]}
         isInvalid={!!errors[props.name]}
         {...props}

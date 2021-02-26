@@ -1,19 +1,20 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { Carousel } from 'react-bootstrap';
 // Posts Api
 import { postsApi } from 'api/api';
 // AC
 import { deletePost } from 'redux/posts-reducer';
-// React-bootstrap
-import { Carousel } from 'react-bootstrap';
 // Assets
 import postEmpty from 'assets/img/postEmpty.jpg';
+// Css
+import '../Posts.css';
 
 const mapDispatchToProps = {
   deletePost
 };
 
-class Post extends Component {
+class PostCard extends Component {
   onDelete = () => {
     postsApi.deletePost(this.props.id).then(() => {
       this.props.deletePost(this.props.id);
@@ -27,19 +28,23 @@ class Post extends Component {
       <div className="card">
         <div className="card-img-top">
           {this.props.images.length === 0 ? (
-            <img className="d-block w-100" src={postEmpty} alt="..." />
+            <div
+              className="postCard__image"
+              style={{ backgroundImage: `url(${postEmpty})` }}
+            />
           ) : this.props.images.length === 1 ? (
-            <img
-              className="d-block w-100"
-              src={this.props.images[0]}
-              alt="..."
+            <div
+              className="postCard__image"
+              style={{ backgroundImage: `url(${this.props.images[0].small})` }}
             />
           ) : (
-            <Carousel>
-              {this.props.images.map(imageUrl => (
-                <Carousel.Item>
-                  <img className="d-block w-100" src={imageUrl} alt="..." />
-                </Carousel.Item>
+            <Carousel interval={null}>
+              {this.props.images.map((image, i) => (
+                <Carousel.Item
+                  key={i}
+                  className="postCard__image"
+                  style={{ backgroundImage: `url(${image.small})` }}
+                />
               ))}
             </Carousel>
           )}
@@ -64,4 +69,4 @@ class Post extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Post);
+export default connect(null, mapDispatchToProps)(PostCard);

@@ -9,12 +9,16 @@ function SelectField(props) {
 
   const fieldClass = isInvalid ? 'is-invalid' : isValid ? 'is-valid' : '';
   const fieldStyles = {
-    control: provided =>
+    control: (provided) =>
       isInvalid
         ? { ...provided, borderColor: '#dc3545' }
         : isValid
         ? { ...provided, borderColor: '#28a745' }
         : { ...provided }
+  };
+
+  const handleChange = (value, action) => {
+    props.handleChange({ [action.name]: value });
   };
 
   return (
@@ -23,7 +27,7 @@ function SelectField(props) {
       <Select
         isMulti={props.isMulti}
         name={props.name}
-        onChange={props.handleChange}
+        onChange={handleChange}
         options={props.options[props.name]}
         styles={fieldStyles}
         className={fieldClass}
