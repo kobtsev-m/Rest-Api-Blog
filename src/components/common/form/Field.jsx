@@ -8,7 +8,10 @@ function FormControl({ handleChange, errors, isSubmitted, ...props }) {
   };
   return (
     <Form.Group controlId={`${props.name}Input`}>
-      <Form.Label>{capitalize(props.name)}</Form.Label>
+      <Form.Label>
+        {capitalize(props.name)}
+        {props.required ? '*' : ''}
+      </Form.Label>
       <Form.Control
         onChange={handleChangeControl}
         isValid={isSubmitted && !errors[props.name]}

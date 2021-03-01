@@ -15,7 +15,10 @@ export function BackButton(props) {
 export function SubmitButton(props) {
   return (
     <div className="d-flex">
-      <button type="submit" className="btn btn-outline-success ml-auto">
+      <button
+        type="submit"
+        className="btn btn-success col-12 col-md-3 ml-md-auto"
+      >
         {props.text}
       </button>
     </div>

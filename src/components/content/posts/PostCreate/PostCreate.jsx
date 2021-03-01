@@ -9,22 +9,15 @@ import SelectField from 'components/common/form/SelectField';
 import ImageField from 'components/common/form/ImageField';
 import { BackButton, SubmitButton } from 'components/common/buttons/Buttons';
 
-function PostForm({ handleSubmit, values, options, imagesSrc, ...props }) {
+function PostForm({ handleSubmit, options, values, ...props }) {
   return (
     <Form className="col-12 p-0" onSubmit={handleSubmit}>
-      <ImageField
-        name="images"
-        label="Put here your images"
-        values={values}
-        imagesSrc={imagesSrc}
-        {...props}
-      />
-      <Field name="title" {...props} />
-      <Field type="textarea" name="content" rows={3} {...props} />
-      <SelectField
-        isMulti={false}
-        name="status"
-        options={options}
+      <Field name="title" required={true} {...props} />
+      <Field
+        type="textarea"
+        name="content"
+        rows={3}
+        required={true}
         {...props}
       />
       <SelectField
@@ -33,6 +26,15 @@ function PostForm({ handleSubmit, values, options, imagesSrc, ...props }) {
         options={options}
         {...props}
       />
+      <SelectField
+        isMulti={false}
+        name="status"
+        options={options}
+        value={values.status}
+        required={true}
+        {...props}
+      />
+      <ImageField name="images" {...props} />
       <SubmitButton text="Create" />
     </Form>
   );
@@ -41,7 +43,7 @@ function PostForm({ handleSubmit, values, options, imagesSrc, ...props }) {
 const initialPostState = {
   values: {
     title: '',
-    status: '',
+    status: { label: 'published', value: 'P' },
     content: '',
     categories: [],
     images: []

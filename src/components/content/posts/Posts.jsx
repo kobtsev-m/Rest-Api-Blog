@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import PostForm from './PostCreate/PostCreate';
+import PostCreate from './PostCreate/PostCreate';
+import PostDetail from './PostDetail/PostDetail';
 import PostsList from './PostsList/PostsList';
 
 function Posts(props) {
@@ -13,19 +14,20 @@ function Posts(props) {
       <hr className="row my-3" />
       <Route
         exact
-        path="/posts/add"
-        render={() => <PostForm {...props.postForm} />}
-      />
-      <Route
-        exact
         path="/posts"
         render={() => <PostsList {...props.postsList} />}
       />
+      <Route
+        exact
+        path="/posts/add"
+        render={() => <PostCreate {...props.postForm} />}
+      />
+      <Route exact path="/posts/:postId(\d+)" component={PostDetail} />
     </>
   );
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   postForm: state.postsData.postForm,
   postsList: { posts: state.postsData.posts }
 });

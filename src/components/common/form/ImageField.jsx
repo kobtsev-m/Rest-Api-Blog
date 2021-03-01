@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCloudUploadAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './Field.css';
 
 class ImageField extends Component {
@@ -62,15 +62,17 @@ class ImageField extends Component {
     if ([...files].some((file) => !file.name.match(/.(jpg|jpeg|png|gif)$/i))) {
       return;
     }
+    const newImgsList = [...this.state.images, ...files];
+    const newImgsUrls = [
+      ...this.state.imagesUrls,
+      ...[...files].map((file) => URL.createObjectURL(file))
+    ];
     this.setState({
-      images: [...this.state.images, ...files],
-      imagesUrls: [
-        ...this.state.imagesUrls,
-        ...[...files].map((file) => URL.createObjectURL(file))
-      ]
+      images: newImgsList,
+      imagesUrls: newImgsUrls
     });
     this.props.handleChange({
-      [this.props.name]: [...this.state.images, ...files]
+      [this.props.name]: newImgsList
     });
   };
   handleDelete = (idx) => {
@@ -80,38 +82,40 @@ class ImageField extends Component {
       images: newImgsList,
       imagesUrls: newUrlsList
     });
+    console.log(newImgsList);
     this.props.handleChange({
       [this.props.name]: newImgsList
     });
   };
   render() {
     return (
-      <div className="mb-3">
+      <div className="form-group mb-2">
+        <label>Post Images</label>
         <div className="imageField border rounded p-3 mb-2" ref={this.dropRef}>
-          {this.state.dragging && (
-            <div className="imageField__hover">
-              <span className="imageField__hover__label h4">
-                {this.props.label}
-              </span>
-            </div>
-          )}
+          {this.state.dragging && <div className="imageField__hover"></div>}
           <div className="d-flex">
-            {this.state.imagesUrls.map((imageUrl, i) => (
-              <div
-                key={i}
-                id={'imgDrag' + i}
-                className="imageField__image mr-2"
-                style={{ backgroundImage: `url(${imageUrl})` }}
-              >
-                <button
-                  type="button"
-                  className="btn btn-sm btn-danger"
-                  onClick={() => this.handleDelete(i)}
+            {this.state.imagesUrls.length ? (
+              this.state.imagesUrls.map((imageUrl, i) => (
+                <div
+                  key={i}
+                  className="imageField__image mr-2"
+                  style={{ backgroundImage: `url(${imageUrl})` }}
                 >
-                  <FontAwesomeIcon icon={faTimes} />
-                </button>
+                  <button
+                    type="button"
+                    className="btn btn-sm btn-danger m-1"
+                    onClick={() => this.handleDelete(i)}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="imageField__image w-100 d-flex align-items-center justify-content-center">
+                <FontAwesomeIcon icon={faCloudUploadAlt} className="h1" />
+                <span className="h4 text-muted ml-3">Upload images</span>
               </div>
-            ))}
+            )}
           </div>
         </div>
         <input

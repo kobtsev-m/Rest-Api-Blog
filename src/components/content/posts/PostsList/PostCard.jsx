@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { Carousel } from 'react-bootstrap';
 // Posts Api
 import { postsApi } from 'api/api';
@@ -21,8 +22,8 @@ class PostCard extends Component {
     });
   };
   render() {
-    const categoriesList = this.props.categories.map((category, idx) =>
-      !idx ? category.name : `, ${category.name}`
+    const categoriesList = this.props.categories.map((category, i) =>
+      !i ? category.name : `, ${category.name}`
     );
     return (
       <div className="card">
@@ -59,10 +60,23 @@ class PostCard extends Component {
           </li>
           <li className="list-group-item">Category: {categoriesList}</li>
         </ul>
-        <div className="card-body">
-          <button onClick={this.onDelete} className="btn btn-danger">
-            Delete
-          </button>
+        <div className="card-body d-flex">
+          <div className="col-6 p-0 pr-1">
+            <NavLink
+              to={`posts/${this.props.id}`}
+              className="btn btn-outline-dark w-100"
+            >
+              Open
+            </NavLink>
+          </div>
+          <div className="col-6 p-0 pl-1">
+            <button
+              onClick={this.onDelete}
+              className="btn btn-outline-danger w-100"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     );

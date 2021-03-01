@@ -23,7 +23,10 @@ function SelectField(props) {
 
   return (
     <Form.Group controlId={`${props.name}Select`}>
-      <Form.Label>{capitalize(props.name)}</Form.Label>
+      <Form.Label>
+        {capitalize(props.name)}
+        {props.required ? '*' : ''}
+      </Form.Label>
       <Select
         isMulti={props.isMulti}
         name={props.name}
@@ -31,6 +34,7 @@ function SelectField(props) {
         options={props.options[props.name]}
         styles={fieldStyles}
         className={fieldClass}
+        value={props.value}
       />
       <Form.Control.Feedback>Looks Good!</Form.Control.Feedback>
       <Form.Control.Feedback type="invalid">

@@ -4,7 +4,7 @@ import * as utils from './utils';
 
 // Base API
 const baseApi = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: 'http://infinite-hamlet-30732.herokuapp.com/api/',
   headers: {
     'Content-type': 'application/json'
   }
@@ -13,6 +13,9 @@ const baseApi = axios.create({
 export const postsApi = {
   getPosts() {
     return baseApi.get('posts/').then((response) => response.data);
+  },
+  getPost(postId) {
+    return baseApi.get(`posts/${postId}`).then((response) => response.data);
   },
   getSelectFieldsOptions() {
     return baseApi
@@ -29,7 +32,6 @@ export const postsApi = {
   createPost(values, options) {
     let parsedValues = utils.parseSelectFieldsData(values, options);
     let formData = new FormData();
-    console.log(parsedValues);
     for (let [key, value] of Object.entries(parsedValues)) {
       if (typeof value === 'object') {
         for (let item of value) {
@@ -39,6 +41,7 @@ export const postsApi = {
         formData.append(key, value);
       }
     }
+    console.log(formData);
     return baseApi.post('posts/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
