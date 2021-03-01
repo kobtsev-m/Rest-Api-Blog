@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 
 // react-router-dom
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 // Bootstrap import
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,9 +16,9 @@ import store from './redux/store';
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter basename="/">
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </Provider>
 );
 
