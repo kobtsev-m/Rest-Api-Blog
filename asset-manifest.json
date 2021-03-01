@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Rest-Api-Blog/static/css/main.c4489337.chunk.css",
-    "main.js": "/Rest-Api-Blog/static/js/main.88aec36c.chunk.js",
-    "main.js.map": "/Rest-Api-Blog/static/js/main.88aec36c.chunk.js.map",
+    "main.js": "/Rest-Api-Blog/static/js/main.4ab94f9e.chunk.js",
+    "main.js.map": "/Rest-Api-Blog/static/js/main.4ab94f9e.chunk.js.map",
     "runtime-main.js": "/Rest-Api-Blog/static/js/runtime-main.5a4eabe3.js",
     "runtime-main.js.map": "/Rest-Api-Blog/static/js/runtime-main.5a4eabe3.js.map",
     "static/css/2.150d169a.chunk.css": "/Rest-Api-Blog/static/css/2.150d169a.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.0df68770.chunk.js",
     "static/css/main.c4489337.chunk.css",
-    "static/js/main.88aec36c.chunk.js"
+    "static/js/main.4ab94f9e.chunk.js"
   ]
 }
