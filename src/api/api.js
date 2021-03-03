@@ -4,7 +4,7 @@ import * as utils from './utils';
 
 // Base API
 export const baseApi = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/',
+  baseURL: 'https://infinite-hamlet-30732.herokuapp.com/api/',
   headers: {
     'Content-type': 'application/json'
   }
