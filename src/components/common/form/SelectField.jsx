@@ -5,7 +5,7 @@ import { capitalize } from 'lodash';
 
 function SelectField(props) {
   const isInvalid = !!props.errors[props.name];
-  const isValid = props.isSubmitted && !props.errors[props.name];
+  const isValid = props.submitted && !props.errors[props.name];
 
   const fieldClass = isInvalid ? 'is-invalid' : isValid ? 'is-valid' : '';
   const fieldStyles = {

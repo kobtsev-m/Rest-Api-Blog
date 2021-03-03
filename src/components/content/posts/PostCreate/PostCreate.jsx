@@ -9,7 +9,7 @@ import SelectField from 'components/common/form/SelectField';
 import ImageField from 'components/common/form/ImageField';
 import { BackButton, SubmitButton } from 'components/common/buttons/Buttons';
 
-function PostForm({ handleSubmit, options, values, ...props }) {
+function PostForm({ handleSubmit, options, values, submitting, ...props }) {
   return (
     <Form className="col-12 p-0" onSubmit={handleSubmit}>
       <Field name="title" required={true} {...props} />
@@ -35,7 +35,7 @@ function PostForm({ handleSubmit, options, values, ...props }) {
         {...props}
       />
       <ImageField name="images" {...props} />
-      <SubmitButton text="Create" />
+      <SubmitButton text="Create" disabled={submitting} />
     </Form>
   );
 }
@@ -50,7 +50,8 @@ const initialPostState = {
   },
   options: {},
   errors: {},
-  isSubmitted: false
+  submitted: false,
+  submitting: false
 };
 
 class PostCreate extends Component {
@@ -62,23 +63,28 @@ class PostCreate extends Component {
   }
   componentDidMount() {
     postsApi
-      .getSelectFieldsOptions()
-      .then((optionsObj) => this.setState({ options: optionsObj }));
-    postsApi
-      .getMany2ManyFieldsOptions()
-      .then((optionsObj) => ({ ...this.state.options, ...optionsObj }))
-      .then((optionsObj) => this.setState({ options: optionsObj }));
+      .getSelectFieldsOptions(['status', 'categories'])
+      .then((options) => this.setState({ options }));
   }
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ submitting: true });
     postsApi
       .createPost(this.state.values, this.state.options)
       .then(() => {
         this.redirect = true;
-        this.setState({ ...initialPostState, isSubmitted: true });
+        this.setState({
+          ...initialPostState,
+          submitted: true,
+          submitting: false
+        });
       })
       .catch((error) => {
-        this.setState({ errors: error.response.data, isSubmitted: true });
+        this.setState({
+          errors: error.response.data,
+          submitted: true,
+          submitting: false
+        });
       });
   };
   handleChange = (newValue) => {

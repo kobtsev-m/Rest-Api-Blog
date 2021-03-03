@@ -8,17 +8,24 @@ import { postsApi } from 'api/api';
 import { deletePost } from 'redux/posts-reducer';
 // Assets
 import postEmpty from 'assets/img/postEmpty.jpg';
-// Css
-import '../Posts.css';
+// Common
+import { LoadButton } from 'components/common/buttons/Buttons';
+import LoadImage from 'components/common/images/LoadImage';
 
 const mapDispatchToProps = {
   deletePost
 };
 
 class PostCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { deleting: false };
+  }
   onDelete = () => {
+    this.setState({ deleting: true });
     postsApi.deletePost(this.props.id).then(() => {
       this.props.deletePost(this.props.id);
+      this.setState({ deleting: false });
     });
   };
   render() {
@@ -27,25 +34,17 @@ class PostCard extends Component {
     );
     return (
       <div className="card">
-        <div className="card-img-top">
+        <div className="card-img-top" style={{ backgroundColor: '#2b2b2b' }}>
           {this.props.images.length === 0 ? (
-            <div
-              className="postCard__image"
-              style={{ backgroundImage: `url(${postEmpty})` }}
-            />
+            <LoadImage src={postEmpty} />
           ) : this.props.images.length === 1 ? (
-            <div
-              className="postCard__image"
-              style={{ backgroundImage: `url(${this.props.images[0].small})` }}
-            />
+            <LoadImage src={this.props.images[0].small} />
           ) : (
             <Carousel interval={null}>
               {this.props.images.map((image, i) => (
-                <Carousel.Item
-                  key={i}
-                  className="postCard__image"
-                  style={{ backgroundImage: `url(${image.small})` }}
-                />
+                <Carousel.Item key={i}>
+                  <LoadImage src={image.small} />
+                </Carousel.Item>
               ))}
             </Carousel>
           )}
@@ -70,12 +69,13 @@ class PostCard extends Component {
             </NavLink>
           </div>
           <div className="col-6 p-0 pl-1">
-            <button
+            <LoadButton
+              text="Delete"
+              variant="outline-danger"
+              disabled={this.state.deleting}
               onClick={this.onDelete}
-              className="btn btn-outline-danger w-100"
-            >
-              Delete
-            </button>
+              className="w-100"
+            />
           </div>
         </div>
       </div>

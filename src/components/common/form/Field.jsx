@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { capitalize } from 'lodash';
 
-function FormControl({ handleChange, errors, isSubmitted, ...props }) {
+function FormControl({ handleChange, errors, submitted, ...props }) {
   const handleChangeControl = (event) => {
     handleChange({ [event.target.name]: event.target.value });
   };
@@ -14,7 +14,7 @@ function FormControl({ handleChange, errors, isSubmitted, ...props }) {
       </Form.Label>
       <Form.Control
         onChange={handleChangeControl}
-        isValid={isSubmitted && !errors[props.name]}
+        isValid={submitted && !errors[props.name]}
         isInvalid={!!errors[props.name]}
         {...props}
       ></Form.Control>

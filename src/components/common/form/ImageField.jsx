@@ -82,7 +82,6 @@ class ImageField extends Component {
       images: newImgsList,
       imagesUrls: newUrlsList
     });
-    console.log(newImgsList);
     this.props.handleChange({
       [this.props.name]: newImgsList
     });
