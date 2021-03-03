@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/Rest-Api-Blog/static/css/main.8d178371.chunk.css",
-    "main.js": "/Rest-Api-Blog/static/js/main.9255586b.chunk.js",
-    "main.js.map": "/Rest-Api-Blog/static/js/main.9255586b.chunk.js.map",
+    "main.css": "/Rest-Api-Blog/static/css/main.8ae477d0.chunk.css",
+    "main.js": "/Rest-Api-Blog/static/js/main.be1569da.chunk.js",
+    "main.js.map": "/Rest-Api-Blog/static/js/main.be1569da.chunk.js.map",
     "runtime-main.js": "/Rest-Api-Blog/static/js/runtime-main.5a4eabe3.js",
     "runtime-main.js.map": "/Rest-Api-Blog/static/js/runtime-main.5a4eabe3.js.map",
     "static/css/2.150d169a.chunk.css": "/Rest-Api-Blog/static/css/2.150d169a.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.d8c59cf6.chunk.js.map": "/Rest-Api-Blog/static/js/2.d8c59cf6.chunk.js.map",
     "index.html": "/Rest-Api-Blog/index.html",
     "static/css/2.150d169a.chunk.css.map": "/Rest-Api-Blog/static/css/2.150d169a.chunk.css.map",
-    "static/css/main.8d178371.chunk.css.map": "/Rest-Api-Blog/static/css/main.8d178371.chunk.css.map",
+    "static/css/main.8ae477d0.chunk.css.map": "/Rest-Api-Blog/static/css/main.8ae477d0.chunk.css.map",
     "static/js/2.d8c59cf6.chunk.js.LICENSE.txt": "/Rest-Api-Blog/static/js/2.d8c59cf6.chunk.js.LICENSE.txt",
     "static/media/homeBrand.d0908521.jpg": "/Rest-Api-Blog/static/media/homeBrand.d0908521.jpg"
   },
@@ -18,7 +18,7 @@
     "static/js/runtime-main.5a4eabe3.js",
     "static/css/2.150d169a.chunk.css",
     "static/js/2.d8c59cf6.chunk.js",
-    "static/css/main.8d178371.chunk.css",
-    "static/js/main.9255586b.chunk.js"
+    "static/css/main.8ae477d0.chunk.css",
+    "static/js/main.be1569da.chunk.js"
   ]
 }
