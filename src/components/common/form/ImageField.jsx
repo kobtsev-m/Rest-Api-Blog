@@ -14,11 +14,11 @@ class ImageField extends Component {
     this.dropRef = React.createRef();
     this.dragCounter = 0;
   }
-  handleDrag = (e) => {
+  handleDrag = e => {
     e.preventDefault();
     e.stopPropagation();
   };
-  handleDragIn = (e) => {
+  handleDragIn = e => {
     e.preventDefault();
     e.stopPropagation();
     this.dragCounter++;
@@ -26,7 +26,7 @@ class ImageField extends Component {
       this.setState({ dragging: true });
     }
   };
-  handleDragOut = (e) => {
+  handleDragOut = e => {
     e.preventDefault();
     e.stopPropagation();
     this.dragCounter--;
@@ -34,7 +34,7 @@ class ImageField extends Component {
       this.setState({ dragging: false });
     }
   };
-  handleDrop = (e) => {
+  handleDrop = e => {
     e.preventDefault();
     e.stopPropagation();
     this.setState({ dragging: false });
@@ -58,14 +58,14 @@ class ImageField extends Component {
     div.removeEventListener('dragover', this.handleDrag);
     div.removeEventListener('drop', this.handleDrop);
   }
-  handleChange = (files) => {
-    if ([...files].some((file) => !file.name.match(/.(jpg|jpeg|png|gif)$/i))) {
+  handleChange = files => {
+    if ([...files].some(file => !file.name.match(/.(jpg|jpeg|png|svg)$/i))) {
       return;
     }
     const newImgsList = [...this.state.images, ...files];
     const newImgsUrls = [
       ...this.state.imagesUrls,
-      ...[...files].map((file) => URL.createObjectURL(file))
+      ...[...files].map(file => URL.createObjectURL(file))
     ];
     this.setState({
       images: newImgsList,
@@ -75,7 +75,7 @@ class ImageField extends Component {
       [this.props.name]: newImgsList
     });
   };
-  handleDelete = (idx) => {
+  handleDelete = idx => {
     const newImgsList = this.state.images.filter((_, i) => i !== idx);
     const newUrlsList = this.state.imagesUrls.filter((_, i) => i !== idx);
     this.setState({
@@ -111,8 +111,13 @@ class ImageField extends Component {
               ))
             ) : (
               <div className="imageField__image w-100 d-flex align-items-center justify-content-center">
-                <FontAwesomeIcon icon={faCloudUploadAlt} className="h1" />
-                <span className="h4 text-muted ml-3">Upload images</span>
+                <FontAwesomeIcon icon={faCloudUploadAlt} className="h1 m-0" />
+                <div className="d-flex flex-column align-items-center ml-3">
+                  <span className="h4 text-muted mb-0">Upload images</span>
+                  <small className="form-text text-muted">
+                    Formats: Jpg, Jpeg, Png, Svg
+                  </small>
+                </div>
               </div>
             )}
           </div>
@@ -122,7 +127,7 @@ class ImageField extends Component {
           multiple={true}
           className="d-none"
           id="imageFieldInput"
-          onChange={(e) => this.handleChange(e.target.files)}
+          onChange={e => this.handleChange(e.target.files)}
         />
         <label
           htmlFor="imageFieldInput"

@@ -11,7 +11,7 @@ class Posts extends Component {
   render() {
     return (
       <>
-        <div className="row">
+        <div className="row justify-content-center justify-content-md-start">
           <span className="h2 mb-1">Categories</span>
         </div>
         <hr className="row my-3" />

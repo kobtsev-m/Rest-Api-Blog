@@ -29,9 +29,6 @@ class PostCard extends Component {
     });
   };
   render() {
-    const categoriesList = this.props.categories.map((category, i) =>
-      !i ? category.name : `, ${category.name}`
-    );
     return (
       <div className="card">
         <div className="card-img-top" style={{ backgroundColor: '#2b2b2b' }}>
@@ -51,13 +48,22 @@ class PostCard extends Component {
         </div>
         <div className="card-body">
           <h5 className="card-title">{this.props.title}</h5>
-          <p className="card-text">{this.props.content}</p>
+          <p className="card-text text-truncate">{this.props.content}</p>
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
             Owner: {this.props.owner.username}
           </li>
-          <li className="list-group-item">Category: {categoriesList}</li>
+          <li className="list-group-item">
+            Categories:{' '}
+            {this.props.categories.length ? (
+              this.props.categories.map((category, i) =>
+                !i ? category.name : `, ${category.name}`
+              )
+            ) : (
+              <span className="text-weight-light text-muted">Empty</span>
+            )}
+          </li>
         </ul>
         <div className="card-body d-flex">
           <div className="col-6 p-0 pr-1">
@@ -65,7 +71,7 @@ class PostCard extends Component {
               to={`posts/${this.props.id}`}
               className="btn btn-outline-dark w-100"
             >
-              Open
+              Read...
             </NavLink>
           </div>
           <div className="col-6 p-0 pl-1">

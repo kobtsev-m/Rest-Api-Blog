@@ -8,7 +8,7 @@ import PostsList from './PostsList/PostsList';
 function Posts(props) {
   return (
     <>
-      <div className="row">
+      <div className="row justify-content-center justify-content-md-start">
         <span className="h2 mb-1">Posts</span>
       </div>
       <hr className="row my-3" />
@@ -27,7 +27,7 @@ function Posts(props) {
   );
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   postForm: state.postsData.postForm,
   postsList: { posts: state.postsData.posts }
 });

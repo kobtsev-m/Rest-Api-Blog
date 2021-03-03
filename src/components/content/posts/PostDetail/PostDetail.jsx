@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { postsApi } from 'api/api';
 import { BackButton } from 'components/common/buttons/Buttons';
 import { SpinnerWithText } from 'components/common/loaders/Loaders';
+import { Carousel } from 'react-bootstrap';
+// Assets
+import postEmpty from 'assets/img/postEmpty.jpg';
+// Common
 import LoadImage from 'components/common/images/LoadImage';
 
 class PostDetail extends Component {
@@ -14,7 +18,7 @@ class PostDetail extends Component {
     this.setState({ loading: true });
     postsApi
       .getPost(postId)
-      .then((postData) => this.setState({ postData, loading: false }));
+      .then(postData => this.setState({ postData, loading: false }));
   }
   render() {
     const lastUpdated = new Date(this.state.postData.updated);
@@ -29,14 +33,24 @@ class PostDetail extends Component {
         <div className="row card mb-3">
           {!this.state.loading ? (
             <div className="row no-gutters">
-              <div className="col-md-4">
-                <LoadImage
-                  src={
-                    this.state.postData.images &&
-                    this.state.postData.images[0].large
-                  }
-                  height={'20em'}
-                />
+              <div className="col-md-4" style={{ backgroundColor: '#2b2b2b' }}>
+                {this.state.postData.images &&
+                  (this.state.postData.images.length === 0 ? (
+                    <LoadImage src={postEmpty} height={'20em'} />
+                  ) : this.state.postData.images.length === 1 ? (
+                    <LoadImage
+                      src={this.state.postData.images[0].large}
+                      height={'20em'}
+                    />
+                  ) : (
+                    <Carousel interval={null}>
+                      {this.state.postData.images.map((image, i) => (
+                        <Carousel.Item key={i}>
+                          <LoadImage src={image.large} height={'20em'} />
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
+                  ))}
               </div>
               <div className="col-md-8">
                 <div className="card-body">

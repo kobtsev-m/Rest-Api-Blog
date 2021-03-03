@@ -13,6 +13,7 @@ class LoadImage extends Component {
   render() {
     return (
       <div
+        className={this.props.className}
         style={{
           height: this.props.height || '14em',
           backgroundSize: 'cover',
