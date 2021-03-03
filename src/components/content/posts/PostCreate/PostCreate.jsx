@@ -14,7 +14,7 @@ function PostForm({ handleSubmit, options, values, submitting, ...props }) {
     <Form className="col-12 p-0" onSubmit={handleSubmit}>
       <Field name="title" required={true} {...props} />
       <Field
-        type="textarea"
+        as="textarea"
         name="content"
         rows={3}
         required={true}
@@ -64,9 +64,9 @@ class PostCreate extends Component {
   componentDidMount() {
     postsApi
       .getSelectFieldsOptions(['status', 'categories'])
-      .then(options => this.setState({ options }));
+      .then((options) => this.setState({ options }));
   }
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.setState({ submitting: true });
     postsApi
@@ -79,7 +79,7 @@ class PostCreate extends Component {
           submitting: false
         });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           errors: error.response.data,
           submitted: true,
@@ -87,7 +87,7 @@ class PostCreate extends Component {
         });
       });
   };
-  handleChange = newValue => {
+  handleChange = (newValue) => {
     this.setState({ values: { ...this.state.values, ...newValue } });
   };
   render() {

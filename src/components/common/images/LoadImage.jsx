@@ -18,6 +18,7 @@ class LoadImage extends Component {
           height: this.props.height || '14em',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
+          backgroundColor: '#2b2b2b',
           backgroundImage: `url(${this.props.src})`
         }}
       >

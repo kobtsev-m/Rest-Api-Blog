@@ -30,8 +30,8 @@ class PostCard extends Component {
   };
   render() {
     return (
-      <div className="card">
-        <div className="card-img-top" style={{ backgroundColor: '#2b2b2b' }}>
+      <div className="card mb-2">
+        <div className="card-img-top">
           {this.props.images.length === 0 ? (
             <LoadImage src={postEmpty} />
           ) : this.props.images.length === 1 ? (

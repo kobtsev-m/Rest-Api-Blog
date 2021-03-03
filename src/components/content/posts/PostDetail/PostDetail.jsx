@@ -18,7 +18,7 @@ class PostDetail extends Component {
     this.setState({ loading: true });
     postsApi
       .getPost(postId)
-      .then(postData => this.setState({ postData, loading: false }));
+      .then((postData) => this.setState({ postData, loading: false }));
   }
   render() {
     const lastUpdated = new Date(this.state.postData.updated);
@@ -33,7 +33,7 @@ class PostDetail extends Component {
         <div className="row card mb-3">
           {!this.state.loading ? (
             <div className="row no-gutters">
-              <div className="col-md-4" style={{ backgroundColor: '#2b2b2b' }}>
+              <div className="col-md-4 p-4 pr-0">
                 {this.state.postData.images &&
                   (this.state.postData.images.length === 0 ? (
                     <LoadImage src={postEmpty} height={'20em'} />
@@ -55,7 +55,17 @@ class PostDetail extends Component {
               <div className="col-md-8">
                 <div className="card-body">
                   <h5 className="card-title">{this.state.postData.title}</h5>
-                  <p className="card-text">{this.state.postData.content}</p>
+                  <p className="card-text">
+                    {this.state.postData.content &&
+                      this.state.postData.content
+                        .split('\n')
+                        .map((item, i) => (
+                          <span key={i}>
+                            {item}
+                            <br />
+                          </span>
+                        ))}
+                  </p>
                   <p className="card-text">
                     <small className="text-muted">
                       Last updated {lastUpdatedDate}, {lastUpdatedTime}
