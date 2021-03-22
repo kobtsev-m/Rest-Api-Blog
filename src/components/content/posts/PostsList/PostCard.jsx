@@ -66,7 +66,7 @@ class PostCard extends Component {
           </li>
         </ul>
         <div className="card-body d-flex">
-          <div className="col-6 p-0 pr-1">
+          <div className="col p-0 pr-1">
             <NavLink
               to={`posts/${this.props.id}`}
               className="btn btn-outline-dark w-100"
@@ -74,15 +74,17 @@ class PostCard extends Component {
               Read...
             </NavLink>
           </div>
-          <div className="col-6 p-0 pl-1">
-            <LoadButton
-              text="Delete"
-              variant="outline-danger"
-              disabled={this.state.deleting}
-              onClick={this.onDelete}
-              className="w-100"
-            />
-          </div>
+          {this.props.postsTotal > 3 && (
+            <div className="col p-0 pl-1">
+              <LoadButton
+                text="Delete"
+                variant="outline-danger"
+                disabled={this.state.deleting}
+                onClick={this.onDelete}
+                className="w-100"
+              />
+            </div>
+          )}
         </div>
       </div>
     );

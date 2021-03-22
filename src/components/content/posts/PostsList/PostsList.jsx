@@ -11,13 +11,13 @@ import PostCard from './PostCard';
 class PostsList extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: false };
+    this.state = { loading: false, postsTotal: 0 };
   }
   componentDidMount() {
     this.setState({ loading: true });
-    postsApi.getPosts().then(posts => {
+    postsApi.getPosts().then((posts) => {
       this.props.setPosts(posts);
-      this.setState({ loading: false });
+      this.setState({ loading: false, postsTotal: posts.length });
     });
   }
   render() {
@@ -35,9 +35,9 @@ class PostsList extends Component {
         <hr className="row my-3" />
         <div className="row">
           {!this.state.loading ? (
-            this.props.posts.map(post => (
+            this.props.posts.map((post) => (
               <div key={post.id} className="col-12 col-md-6 col-lg-4 mb-2">
-                <PostCard {...post} />
+                <PostCard postsTotal={this.state.postsTotal} {...post} />
               </div>
             ))
           ) : (

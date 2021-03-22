@@ -27,11 +27,13 @@ export const postsApi = {
   createPost(values, options) {
     const parsedValues = utils.parseSelectFieldsData(values, options);
     const formData = utils.toFormData(parsedValues);
-    return baseApi.post('posts/', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+    return baseApi
+      .post('posts/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .catch((error) => console.log(error.response));
   },
   deletePost(postId) {
     return baseApi.delete(`posts/${postId}`);
